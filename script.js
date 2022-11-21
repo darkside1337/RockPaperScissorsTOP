@@ -1,7 +1,9 @@
-let playerSelection = "rock";
-const computerSelection = getComputerChoice();
 let playerScore = 0;
 let computerScore = 0;
+
+const buttons = document.querySelectorAll("input");
+const roundDiv = document.querySelector(".roundScore");
+const finalResult = document.querySelector(".Scores");
 
 function getComputerChoice() {
   let arrOfChoices = [`rock`, `paper`, `scissors`];
@@ -9,39 +11,50 @@ function getComputerChoice() {
   let computerSelection = arrOfChoices[randomNum];
   return computerSelection;
 }
-getComputerChoice();
+const checkWinner = function (playerScore, computerScore) {
+  if (computerScore === 5) {
+    finalResult.textContent = "The computer has won! try again.";
+    disableButtons();
+  } else if (playerScore === 5) {
+    finalResult.textContent = "Congratulations, you won!";
+    disableButtons();
+  }
+};
 
-function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection) {
+  let computerSelection = getComputerChoice();
+  checkWinner(playerScore, computerScore);
   if (playerSelection === `rock` && computerSelection === `rock`) {
-    return `You both played rock, It's a draw`;
+    roundDiv.textContent = `You both played rock, It's a draw`;
   } else if (playerSelection === `rock` && computerSelection === `paper`) {
     computerScore++;
-    return `You lost, paper wraps rock`;
+    roundDiv.textContent = `You lost, paper wraps rock`;
   } else if (playerSelection === `rock` && computerSelection === `scissors`) {
     playerScore++;
-    return `You win! rock breaks scissors`;
+    roundDiv.textContent = `You win! rock breaks scissors`;
   } else if (playerSelection === `paper` && computerSelection === `rock`) {
     playerScore++;
-    return `You win! paper wraps rock!`;
+    roundDiv.textContent = `You win! paper wraps rock!`;
   } else if (playerSelection === `paper` && computerSelection === `paper`) {
-    return `You both played paper, It's a draw`;
+    roundDiv.textContent = `You both played paper, It's a draw`;
   } else if (playerSelection === `paper` && computerSelection === `scissors`) {
     computerScore++;
-    return `You lost! scissors cut paper`;
+    roundDiv.textContent = `You lost! scissors cut paper`;
   } else if (playerSelection === `scissors` && computerSelection === `rock`) {
     computerScore++;
-    return `You lost! rock breaks scissors`;
+    roundDiv.textContent = `You lost! rock breaks scissors`;
   } else if (playerSelection === `scissors` && computerSelection === `paper`) {
     playerScore++;
-    return `You Win! scissors cut paper`;
+    roundDiv.textContent = `You Win! scissors cut paper`;
   } else if (
     playerSelection === `scissors` &&
     computerSelection === `scissors`
   ) {
-    return `You both choose scissors! it's a draw`;
+    roundDiv.textContent = `You both choose scissors! it's a draw`;
   }
 }
-const game = function game() {
+
+/* const game = function game() {
   for (let i = 0; i < 5; i++) {
     let playerSelection = prompt(
       `Please choose "Rock","Paper" or "Scissors".`
@@ -57,4 +70,15 @@ const game = function game() {
     return `===========It's a draw===========`;
   }
 };
-console.log(game());
+*/
+buttons.forEach((button) => {
+  button.addEventListener("click", function () {
+    console.log(`${playerScore}, ${computerScore}`);
+    playRound(button.value);
+  });
+});
+function disableButtons() {
+  buttons.forEach((elem) => {
+    elem.disabled = true;
+  });
+}

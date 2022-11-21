@@ -4,10 +4,29 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script src="script.js"></script>
+    <title>Rock Paper scissors</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    
+    <header>
+      <h1 class="title">Rock Paper scissors</h1>
+    </header>
+    <div class="container">
+      <img src="/icons/rock.png" alt="image of a rock" class="img rock" />
+      <img src="/icons/paper.png" alt="image of a paper" class="img paper" />
+      <img
+        src="/icons/scissors.png"
+        alt="image of scissors"
+        class="img scissors"
+      />
+    </div>
+    <div class="btns">
+      <input type="button" value="rock" class="rockBTN btn" ></input>
+      <input type="button" value="paper" class="paperBTN btn"></input>
+      <input type="button" value="scissors" class="scissorsBTN btn" ></input>
+    </div>
+    <div class="roundScore"></div>
+    <div class="Scores"></div>
   </body>
 </html>
